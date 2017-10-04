@@ -8,7 +8,7 @@ It is assumed that if incorrect entry occurs, the proper error message will be d
 
 Development on the application has been focused only on completing the form and validations, stylistic concerns are not being addressed at this time.
 
-The requirements are as follows for each field:
+### The requirements are as follows for each field, and the results:
 
 * Header: Required, 9-19 characters in length, any allowed
 * MKE: Required, 2-4 alpha/special characters in lenth
