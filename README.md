@@ -20,16 +20,19 @@ special: these are any characters other than numbers and letters, including blan
 * MKE: Required, 2-4 alpha/special characters in lenth
 * Originating Agency Identifier: Required, 9 alphanumeric characters in length
 * Name: Required, 3-30 characters in length, any allowed
-* Sex: Required, 1 character in length, alphabet only
+* Sex: Required, 1 character in length, alphabet only, F (female) M (male) and U (unknown) are the only accepted entries
 * Race: Requires, 1 character in length, alphabet only
 * Height: Required, 3 characters in length, numeric only in FII format, where F is feet and I is inches
 * Weight: Required, 3 characters in length, numeric only in lbs, use leading zero if necessary
-* Hair: Required, 4-10 characters in length, alpha only
+* Hair: Required, 3-10 characters in length, alpha only
 * Offense: Required, 5-15 characters in length, any allowed
-* Date of Warrant/Violation, 8 characters in length, numeric in MMDDYYYY format
+* Date of Warrant/Violation: Required, 8 characters in length, numeric in MMDDYYYY format
 * Drivers License: Optional, 1-20 characters in length, any characters allowed, if included requires DL State & DL Expiration Year
 * DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers Licens & DL Year
 * DL Year: Optional, 4 characters in length, numberic in YYYY format, if included requires Drivers License & DL State
+* License Plate: Optional, 5-8 alphanumeric characters in length, in included requires License State & License Year
+* License State: Optional, 2 characters in length, State Abbreviations only, if included requires License Plate and License Year
+* License Year: Optional, 4 characters in length, numeric in YYYY format, if included requires License Plate and License Year
 
 Upon successful entry, a text blob will be created, which consists of each of the values entered, separated by a '.' - any optional fields left blank will still be denoted in the blob by an additional '.'
 
