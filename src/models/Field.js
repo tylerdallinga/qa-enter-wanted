@@ -13,16 +13,16 @@ export default class Field {
         console.log(value)
         let regex = ''
         if(this.alpha && !this.numeric && !this.special)
-            regex = '^[a-z]+$'
+            regex = '^[a-zA-Z]+$'
         else if(!this.alpha && this.numeric && !this.special)
             // regex = '/^[0-9]+$/i'
             regex = '' //anythingn will be allowed in the supposedly numeric only fields
         else if(this.alpha && !this.numeric && this.special)
             regex = '^([^0-9]*)+$'
         else if(this.alpha && this.numeric && !this.special)
-            regex = '^[a-z0-9]+$'
+            regex = '^[a-zA-Z0-9]+$'
         else if(!this.alpha && this.numeric && this.special)
-            regex = '^([^a-z]*)+$'
+            regex = '^([^a-zA-Z]*)+$'
         
         let valid = true
         let errorMessage = ''
