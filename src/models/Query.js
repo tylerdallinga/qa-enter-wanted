@@ -71,6 +71,8 @@ export default class Query {
         this.valid = false
         errorMessage += 'The field named "' + field.name + '" must be included.\n'
       }
+      if(this[field.code]==='')
+        return false
       console.log(field.code + ' ' + this[field.code])
       let results = field.validate(this[field.code])
       if(!results.valid)

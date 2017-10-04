@@ -6,6 +6,8 @@ This project is to create a web form that will generate the text to submit to th
 
 It is assumed that if incorrect entry occurs, the proper error message will be displayed to assist the user in correcting their mistakes.
 
+Development on the application has been focused only on completing the form and validations, stylistic concerns are not being addressed at this time.
+
 The requirements are as follows for each field:
 
 * Header: Required, 9-19 characters in length, any allowed
