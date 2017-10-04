@@ -16,8 +16,8 @@ Development on the application has been focused only on completing the form and 
 * Name: Rewired, 3-30 characters in length, any allowed
 * Sex: Required, 1 character in length, alphabet only
 * Race: Requires, 1 character in length, alphabet only
-* Height: Required, 3 characters in length, numeric only
-* Weight: Required, 3 characters in length, numeric only
+* Height: Required, 3 characters in length, numeric only in FII format, where F is feet and I is inches
+* Weight: Required, 3 characters in length, numeric only in lbs, use leading zero if necessary
 * Hair: Required, 4-10 characters in length, alpha only
 * Offense: Required, 5-15 characters in length, any allowed
 * Date of Warrant/Violation, 8 characters in length, numeric in MMDDYYYY format
