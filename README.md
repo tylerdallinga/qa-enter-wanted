@@ -32,6 +32,8 @@ At your instructor's direction, you will design/implement test cases to cover th
 
 At another time, also at your instructor's direction, execute the previously created tests, tracking all bugs discovered.
 
+Get your [testing templates here](https://docs.google.com/spreadsheets/d/1G6fFXoie0U2RRnxUGK-cfW6qOUEmZd-cF8W33yRyuVs/edit?usp=sharing).
+
 ## Contributions
 
 If you see a problem or a typo, please fork, make the necessary changes, and create a pull request so we can review your changes and merge them into the master repo and branch.
