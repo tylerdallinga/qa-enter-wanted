@@ -11,7 +11,9 @@ Development on the application has been focused only on completing the form and 
 ### The requirements are as follows for each field, and the results:
 
 alpha: any alphabetical characters, upper or lower case
+
 numeric: numbers only, 0-9
+
 special: these are any characters other than numbers and letters, including blank spaces ' '
 
 * Header: Required, 9-19 characters in length, any allowed
