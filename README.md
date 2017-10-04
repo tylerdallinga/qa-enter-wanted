@@ -28,8 +28,8 @@ special: these are any characters other than numbers and letters, including blan
 * Offense: Required, 5-15 characters in length, any allowed
 * Date of Warrant/Violation: Required, 8 characters in length, numeric in MMDDYYYY format
 * Drivers License: Optional, 1-20 characters in length, any characters allowed, if included requires DL State & DL Expiration Year
-* DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers Licens & DL Year
-* DL Year: Optional, 4 characters in length, numberic in YYYY format, if included requires Drivers License & DL State
+* DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers Licens & DL Expiration Year
+* DL Expiration Year: Optional, 4 characters in length, numberic in YYYY format, if included requires Drivers License & DL State
 * License Plate: Optional, 5-8 alphanumeric characters in length, in included requires License State & License Year
 * License State: Optional, 2 characters in length, State Abbreviations only, if included requires License Plate and License Year
 * License Year: Optional, 4 characters in length, numeric in YYYY format, if included requires License Plate and License Year
