@@ -13,7 +13,7 @@ Development on the application has been focused only on completing the form and 
 * Header: Required, 9-19 characters in length, any allowed
 * MKE: Required, 2-4 alpha/special characters in lenth
 * Originating Agency Identifier: Required, 9 alphanumeric characters in length
-* Name: Rewired, 3-30 characters in length, any allowed
+* Name: Required, 3-30 characters in length, any allowed
 * Sex: Required, 1 character in length, alphabet only
 * Race: Requires, 1 character in length, alphabet only
 * Height: Required, 3 characters in length, numeric only in FII format, where F is feet and I is inches
