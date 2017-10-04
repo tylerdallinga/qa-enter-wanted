@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import Employee from './models/Employee';
+import Query from './models/Query'
+import Field from './models/Field'
 
-import EmployeeEditor from './components/EmployeeEditor'
-import EmployeeList from './components/EmployeeList'
+import QueryEditor from './components/QueryEditor'
 import Header from './components/Header'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      employees: [new Employee(1, 'Bernice Ortiz', 4824931093, 'CEO'), new Employee(-5, 'Marnie Barnett', 3094812387, 'CTO'), new Employee(2, 'Phillip Weaver', 7459831843, 'Manager'), new Employee(3, 'Teresa Osborne', 3841238745, null), new Employee(4, 'Dollie Berry', 4873459812, 'Front-End Developer'), new Employee(5, 'Harriett Williamson', 6571249801, 'Front-End Developer'), new Employee(6, 'Ruby Estrada', 5740923478, 'Back-End Developer'), new Employee(7, 'Lou White', '', 'Full-Stack Developer'), new Employee(8, 'Eve Sparks', 8734567810, 'Product Manager'), new Employee(9, 'Lois Brewer', 8749823456, 'Sales Manager')],
-      selectedEmployee: null
+      query: new Query(),
+      fields: [
+        new Field('Header', 'hdr', true, true, true, 9, 19),
+        new Field('MKE', 'mke', true, false, true, 3, 3), //should allow 2-4
+        new Field('Originating Agency Identifier', 'ori', true, true, false, 9, 9),
+        new Field('Name', 'nam', true, false, true, 3, 30), //should allow numeric
+        new Field('Sex', 'sex', true, false, false, 1, 1),
+        new Field('Race', 'rac', true, false, false, 1, 5), //should only allow 1 character
+        new Field('Height', 'hgt', false, true, false, 3, 3),
+        new Field('Weight', 'wgt', false, true, false, 3, 3),
+        new Field('Hair', 'hai', true, true, false, 1, 10), //should only allow 4-10 alpha
+        new Field('Offense', 'off', true, true, true, 5, 15),
+        new Field('Date of Warrant/Violation', 'dow', true, false, true, 8, 8), //should only allow numeric (in date format)
+        new Field('Drivers License', 'oln', true, true, true, 1, 20),
+        new Field('DL State', 'ols', true, false, true, 2, 2), //should only allow alpha
+        new Field('DL Expiration Year', 'oly', false, true, false, 3, 3), //should only allow 4 numeric for year
+        new Field('License Plate', 'lic', true, true, false, 5, 8),
+        new Field('License State', 'lis', false, true, false, 4, 4), //should only allow 2 alpha
+        new Field('License Year', 'liy', true, false, false, 2, 2) //should allow 4 numeric
+      ]
     }
 
-    this.selectEmployee = this.selectEmployee.bind(this)
     this.refresh = this.refresh.bind(this)
-  }
-
-  selectEmployee(employee) {
-    this.setState({ selectedEmployee: employee })
   }
 
   refresh() {
@@ -31,8 +44,7 @@ class App extends Component {
       <div id="app">
         <Header />
         <div className="main-container">
-        <EmployeeList employees={this.state.employees} selectEmployee={this.selectEmployee} />
-        <EmployeeEditor selected={this.state.selectedEmployee} refreshList={this.refresh} />
+          <QueryEditor query={this.state.query} fields={this.state.fields} />
         </div>
       </div>
     )

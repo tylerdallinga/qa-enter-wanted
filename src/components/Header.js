@@ -4,7 +4,7 @@ class Header extends Component {
   render() {
     return (
       <div className="titleBar">
-        <span className="titleText"> Employers </span>
+        <span className="titleText"> Enter Wanted </span>
       </div>
     )
   }
