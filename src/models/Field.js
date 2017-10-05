@@ -11,24 +11,36 @@ export default class Field {
 
     validate(value){
         let regex = ''
-        if(this.alpha && !this.numeric && !this.special)
+        let errorMessage = 'The "' + this.name + '" field allows '
+        if(this.alpha && !this.numeric && !this.special){
             regex = '^[a-zA-Z]+$'
-        else if(!this.alpha && this.numeric && !this.special)
+            errorMessage += 'only letters.'
+        }
+        else if(!this.alpha && this.numeric && !this.special){
             regex = '^[0-9]+$'
-        else if(this.alpha && !this.numeric && this.special)
+            errorMessage += 'only numberic values.' //should read "numbers"
+        }
+        else if(this.alpha && !this.numeric && this.special){
             regex = '^([^0-9]*)+$'
-        else if(this.alpha && this.numeric && !this.special)
+            errorMessage += 'letters and special characters, no numbers.'
+        }
+        else if(this.alpha && this.numeric && !this.special){
             regex = '^[a-zA-Z0-9]+$'
-        else if(!this.alpha && this.numeric && this.special)
+            errorMessage += 'letters and numbers, no special characters.'
+        }
+        else if(!this.alpha && this.numeric && this.special){
             regex = '^([^a-zA-Z]*)+$'
+            errorMessage += 'numbers and special characters, no letters.'
+        }
+        errorMessage += '\n'
 
         let valid = true
-        let errorMessage = ''
+
         if(regex !== ''){
             let regexp = new RegExp(regex)
             valid = regexp.test(value)
-            if(!valid)       
-                errorMessage += 'The "' + this.name + '" should contain ' + (this.alpha? '': 'no') + ' letters, ' + (this.numeric?'':'no') + ' numbers, and ' + (this.special?'':'no') + 'special characters.\n'   
+            if(valid)
+                errorMessage = ''
         }
         if(value.length < this.min|| value.length > this.max){
             valid = false
