@@ -13,7 +13,7 @@ class App extends Component {
       query: new Query(),
       fields: [
         new Field('Header', 'hdr', true, true, true, 9, 19),
-        new Field('MKE', 'mke', true, false, true, 3, 3), //should allow 2-4
+        new Field('MKE', 'mke', true, false, true, 2, 4),
         new Field('Originating Agency Identifier', 'ori', true, true, false, 9, 9),
         new Field('Name', 'nam', true, false, true, 3, 30), //should allow numeric
         new Field('Sex', 'sex', true, false, false, 1, 1),
