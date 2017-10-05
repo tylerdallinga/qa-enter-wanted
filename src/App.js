@@ -22,7 +22,7 @@ class App extends Component {
         new Field('Weight', 'wgt', false, true, false, 3, 3),
         new Field('Hair', 'hai', true, true, false, 1, 10), //should only allow 3-10 alpha
         new Field('Offense', 'off', true, true, true, 5, 15),
-        new Field('Date of Warrant/Violation', 'dow', true, false, true, 8, 8), //should only allow numeric (in date format)
+        new Field('Date of Warrant/Violation', 'dow', false, true, false, 8, 8), //should only allow numeric (in date format)
         new Field('Drivers License', 'oln', true, true, true, 1, 20),
         new Field('DL State', 'ols', true, false, true, 2, 2), //should only allow alpha
         new Field('DL Expiration Year', 'oly', false, true, false, 3, 3), //should only allow 4 numeric for year

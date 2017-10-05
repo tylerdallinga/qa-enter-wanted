@@ -10,20 +10,18 @@ export default class Field {
     }
 
     validate(value){
-        console.log(value)
         let regex = ''
         if(this.alpha && !this.numeric && !this.special)
             regex = '^[a-zA-Z]+$'
         else if(!this.alpha && this.numeric && !this.special)
-            // regex = '/^[0-9]+$/i'
-            regex = '' //anythingn will be allowed in the supposedly numeric only fields
+            regex = '^[0-9]+$'
         else if(this.alpha && !this.numeric && this.special)
             regex = '^([^0-9]*)+$'
         else if(this.alpha && this.numeric && !this.special)
             regex = '^[a-zA-Z0-9]+$'
         else if(!this.alpha && this.numeric && this.special)
             regex = '^([^a-zA-Z]*)+$'
-        
+
         let valid = true
         let errorMessage = ''
         if(regex !== ''){

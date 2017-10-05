@@ -53,8 +53,6 @@ export default class Query {
 
   validateFields(fields){
     let errorMessage = ''
-    console.log(fields);
-    console.log(this.state)
     if(this.oln!==''||this.ols!==''||this.oly!==''){
       if(this.oln===''||this.ols===''||this.oly===''){
         this.valid = false
@@ -74,7 +72,6 @@ export default class Query {
       }
       if(this[field.code]==='')
         return false
-      console.log(field.code + ' ' + this[field.code])
       let results = field.validate(this[field.code])
       if(!results.valid)
         this.valid = false
