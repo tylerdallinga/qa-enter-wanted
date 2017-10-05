@@ -29,7 +29,7 @@ export default class Query {
       'wgt',
       'hai',
       'off',
-      'lis'
+      'dow'
     ]
     this.optionalFields = [
       'oln',
@@ -37,7 +37,8 @@ export default class Query {
       'ols',
       'lis',
       'liy',
-      'lic'
+      'lic',
+      'lis'
     ]
     this.valid = true
     this.assembledQuery = ''
