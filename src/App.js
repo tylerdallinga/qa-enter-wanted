@@ -20,7 +20,7 @@ class App extends Component {
         new Field('Race', 'rac', true, false, false, null, 1, 5), //should only allow 1 character
         new Field('Height', 'hgt', false, true, false, null, 3, 3),
         new Field('Weight', 'wgt', false, true, false, null, 3, 3),
-        new Field('Hair', 'hai', true, true, false, null, 1, 10), //should only allow 3-10 alpha
+        new Field('Hair', 'hai', true, false, false, null, 1, 10), 
         new Field('Offense', 'off', true, true, true, null, 5, 15),
         new Field('Date of Warrant/Violation', 'dow', false, true, false, 'date', 8, 8),
         new Field('Drivers License', 'oln', true, true, true, null, 1, 20),

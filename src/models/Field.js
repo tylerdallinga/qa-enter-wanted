@@ -13,23 +13,23 @@ const dataTypes = {
     },
     alpha: {
         regex: new RegExp('^[a-zA-Z]+$'),
-        error: 'only characters from the English Alphabet allowed.\n'
+        error: 'can only include characters from the English Alphabet.\n'
     },
     numeric: {
         regex: new RegExp('^[0-9]+$'),
-        error: 'only numeric characters allowed.\n'
+        error: 'can only include numeric characters.\n'
     },
     alphanumeric: {
         regex: new RegExp('^[a-zA-Z0-9]+$'),
-        error: 'only characters from the English Alphabet or numeric characters allowed.\n'
+        error: 'can only include characters from the English Alphabet or numeric characters.\n'
     },
     alphaspecial: {
         regex: new RegExp('^([^0-9]*)+$'),
-        error: 'only characters from the English Alphabet or special characters allowed.\n'
+        error: 'can only include characters from the English Alphabet or special characters.\n'
     },
     numericspecial: {
         regex: new RegExp('^([^a-zA-Z]*)+$'),
-        error: 'only numeric or special characters allowed.\n'
+        error: 'can only include numeric or special characters.\n'
     }
 }
 
@@ -47,7 +47,7 @@ export default class Field {
 
     validate(value) {
         let regex = ''
-        let errorMessage = 'The "' + this.name + '" field allows '
+        let errorMessage = 'The "' + this.name + '" field '
         switch (this.custom) {
             case 'date':
                 regex = dataTypes.date.regex
