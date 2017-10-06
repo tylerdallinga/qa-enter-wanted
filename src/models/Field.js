@@ -30,6 +30,10 @@ const dataTypes = {
     numericspecial: {
         regex: new RegExp('^([^a-zA-Z]*)+$'),
         error: 'can only include numeric or special characters.\n'
+    },
+    state: {
+        regex: new RegExp('^(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|WA|VA|WV|WI|WY|GU|PR|VI)$'),
+        error: 'can only include a valid State/Territory abbreviation.\n'
     }
 }
 
@@ -72,6 +76,10 @@ export default class Field {
                 case 'sex':
                     regex = dataTypes.sex.regex
                     errorMessage += dataTypes.sex.error
+                    break;
+                case 'state':
+                    regex = dataTypes.state.regex
+                    errorMessage += dataTypes.state.error
                     break;
                 default:
                     if (this.alpha && !this.numeric && !this.special) {
