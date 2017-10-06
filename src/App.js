@@ -24,7 +24,7 @@ class App extends Component {
         new Field('Offense', 'off', true, true, true, null, 5, 15),
         new Field('Date of Warrant/Violation', 'dow', false, true, false, 'date', 8, 8),
         new Field('Drivers License', 'oln', true, true, true, null, 1, 20),
-        new Field('DL State', 'ols', true, false, true, null, 2, 2), //should only allow alpha
+        new Field('DL State', 'ols', true, false, false, null, 2, 2),
         new Field('DL Expiration Year', 'oly', false, true, false, 'year', 4, 4),
         new Field('License Plate', 'lic', true, true, false, null, 5, 8),
         new Field('License State', 'lis', true, false, false, null, 2, 2),
