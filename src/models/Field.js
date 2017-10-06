@@ -123,7 +123,6 @@ export default class Field {
                     valid = parseInt(value, 10) <= date.getFullYear() ? true : false //returns true if the year is less than or equal to this year
                 }
             }
-            console.log(this.code + ' ' + errorMessages)
             if (valid)
                 errorMessages = []
         }

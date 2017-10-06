@@ -71,15 +71,14 @@ export default class Query {
       if (this[field.code] === '')
         return false
       let results = field.validate(this[field.code])
-      if (!results.valid)
+      if (!results.valid){
         this.valid = false
-      if (results.errorMessage)
-        errorMessages = errorMessages.concat(results.errorMessage)
+        let tempMessages = errorMessages
+        errorMessages = tempMessages.concat(results.errorMessages)
+      }
       return true
     })
-    console.log('after mandatory fields, is ' + (this.valid ? 'valid' : 'invalid'))
     this.optionalFieldGroups.map(group => {
-      console.log(errorMessages)
       let fieldsEntered = 0
       for (let i = 0; i < group.list.length; i++) {
         if (this[group.list[i]] !== '')
@@ -89,11 +88,9 @@ export default class Query {
         errorMessages.push(group.error) //if there is at least one, but not an entry for each field, will return error message
       return true
     })
-    console.log('after optional fields, is ' + (this.valid ? 'valid' : 'invalid'))
     if (this.valid)
       this.assembledQuery = this.hdr + '.' + this.mke + '.' + this.ori + '/' + this.nam + '.' + this.sex + '.' + this.rac + '.' + this.hgt + ',' + this.wgt + '.' + this.off + '.' + this.hair + '.' + this.dow + '.' + this.oln + '.' + this.ols + this.oly + '.' + this.lic + '.' + this.lis + '.' + this.liy
 
-    console.log(this.valid)
     return ({ valid: this.valid, errorMessages: errorMessages, assembledQuery: this.assembledQuery })
   }
 }

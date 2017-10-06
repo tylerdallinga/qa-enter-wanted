@@ -35,7 +35,6 @@ class QueryEditor extends Component {
 
   submit() {
     let results = this.state.query.validateFields(this.props.fields)
-    console.log('It came back that the results were ' + (results.valid ? 'valid' : 'invalid') + ', with error message ' + results.errorMessages + ', and text blob ' + results.assembledQuery)
     this.setState({ originalQuery: Object.assign({}, this.state.query), notModified: true, validated: true, valid: results.valid, errorMessages: results.errorMessages, assembledQuery: results.assembledQuery })
   }
 
@@ -51,7 +50,6 @@ class QueryEditor extends Component {
         <input className="materialInput" value={this.state.query[field.code]} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
       </div>
     })
-    console.log(typeof this.state.errorMessages)
     let errors = this.state.valid ? '' : this.state.errorMessages.map(error => {
       return error !== '' ? <li className="errorMessage">{error}</li> : ''
     })
