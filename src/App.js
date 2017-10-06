@@ -15,7 +15,7 @@ class App extends Component {
         new Field('Header', 'hdr', true, true, true, null, 9, 19),
         new Field('MKE', 'mke', true, false, true, null, 2, 4),
         new Field('Originating Agency Identifier', 'ori', true, true, false, null, 9, 9),
-        new Field('Name', 'nam', true, false, true, null, 3, 30), //should allow numeric
+        new Field('Name', 'nam', true, true, true, null, 3, 30),
         new Field('Sex', 'sex', true, false, false, 'sex', 1, 1),
         new Field('Race', 'rac', true, false, false, null, 1, 5), //should only allow 1 character
         new Field('Height', 'hgt', false, true, false, null, 3, 3),
