@@ -35,6 +35,7 @@ class QueryEditor extends Component {
 
   submit() {
     let results = this.state.query.validateFields(this.props.fields)
+    console.log('It came back that the results were ' + (results.valid? 'valid' : 'invalid') + ', with error message ' + results.errorMessage + ', and text blob ' + results.assembledQuery)
     this.setState({ originalQuery: Object.assign({}, this.state.query), notModified: true, validated: true, valid: results.valid, errorMessage: results.errorMessage, assembledQuery: results.assembledQuery })
   }
 
@@ -50,7 +51,8 @@ class QueryEditor extends Component {
         <input className="materialInput" value={this.state.query[field.code]} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
       </div>
     })
-    let error = this.state.errorMessage.split('\n').map((item, key) => {
+    console.log(this.state.errorMessage + " <---> " + this.state.assembledQuery + ' <---> ' + this.state.valid)
+    let error = this.state.valid ? '' : this.state.errorMessage.split('\n').map((item, key) => {
       return <span key={key}>{item}<br /></span>
     })
     return (
@@ -78,13 +80,13 @@ class QueryEditor extends Component {
                     </tr>
                 </tbody>
               </table>
-              <span className="placeholderText"> {this.state.validated && this.state.valid ? 'Assembled Query' : 'No results generated due to error.'} </span>
-              <span className="placeholderText"> {this.state.validated && this.state.valid ? this.state.query.assembledQuery : ''} </span>
+              <span className="placeholderText"> {(this.state.validated && this.state.valid) ? 'Assembled Query' : 'No results generated due to error.'} </span>
+              <span className="placeholderText"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
             </div>
             :
             <p id="noEmployee"> No Query Exists </p>
         }
-        <p id="noEmployee"> Version 1.1 </p>
+        <p id="noEmployee"> Version 1.2 </p>
 
       </div>
     )

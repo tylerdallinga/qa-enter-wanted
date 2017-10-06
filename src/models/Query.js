@@ -75,18 +75,21 @@ export default class Query {
       errorMessage += results.errorMessage
       return true
     })
+    console.log('after mandatory fields, is ' + (this.valid ? 'valid' : 'invalid'))
     errorMessage += this.optionalFieldGroups.map(group => {
       console.log(errorMessage)
       let fieldsEntered = 0
-      for (let i = 0; i < group.list.length; i++){
-        if(this[group.list[i]] !== '' )
-          fieldsEntered ++ //adds 1 for every field in the group that has been populated
+      for (let i = 0; i < group.list.length; i++) {
+        if (this[group.list[i]] !== '')
+          fieldsEntered++ //adds 1 for every field in the group that has been populated
       }
       return (fieldsEntered < group.list.length && fieldsEntered > 0) ? group.error : '' //if there is at least one, but not an entry for each field, will return error message
     })
+    console.log('after optional fields, is ' + (this.valid ? 'valid' : 'invalid'))
     if (this.valid)
       this.assembledQuery = this.hdr + '.' + this.mke + '.' + this.ori + '/' + this.nam + '.' + this.sex + '.' + this.rac + '.' + this.hgt + ',' + this.wgt + '.' + this.off + '.' + this.hair + '.' + this.dow + '.' + this.oln + '.' + this.ols + this.oly + '.' + this.lic + '.' + this.lis + '.' + this.liy
 
+    console.log(this.valid)
     return ({ valid: this.valid, errorMessage: errorMessage, assembledQuery: this.assembledQuery })
   }
 }
