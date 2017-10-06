@@ -9,7 +9,7 @@ class QueryEditor extends Component {
       notModified: true,
       validated: false,
       valid: true,
-      errorMessage: '',
+      errorMessages: [],
       assembledQuery: ''
     }
 
@@ -24,7 +24,7 @@ class QueryEditor extends Component {
 
   handleChange(prop, val) {
     if (this.state.notModified) {
-      this.setState({ notModified: false, validated: false, errorMessage: '' })
+      this.setState({ notModified: false, validated: false })
     }
 
     var queryCopy = Object.assign({}, this.state.query)
@@ -35,8 +35,8 @@ class QueryEditor extends Component {
 
   submit() {
     let results = this.state.query.validateFields(this.props.fields)
-    console.log('It came back that the results were ' + (results.valid? 'valid' : 'invalid') + ', with error message ' + results.errorMessage + ', and text blob ' + results.assembledQuery)
-    this.setState({ originalQuery: Object.assign({}, this.state.query), notModified: true, validated: true, valid: results.valid, errorMessage: results.errorMessage, assembledQuery: results.assembledQuery })
+    console.log('It came back that the results were ' + (results.valid ? 'valid' : 'invalid') + ', with error message ' + results.errorMessages + ', and text blob ' + results.assembledQuery)
+    this.setState({ originalQuery: Object.assign({}, this.state.query), notModified: true, validated: true, valid: results.valid, errorMessages: results.errorMessages, assembledQuery: results.assembledQuery })
   }
 
   cancel() {
@@ -47,13 +47,13 @@ class QueryEditor extends Component {
   render() {
     let inputs = this.props.fields.map(field => {
       return <div>
-        <span className="placeholderText"> {field.name} </span>
+        <span className="placeholderText"> {field.name} </span><br />
         <input className="materialInput" value={this.state.query[field.code]} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
       </div>
     })
-    console.log(this.state.errorMessage + " <---> " + this.state.assembledQuery + ' <---> ' + this.state.valid)
-    let error = this.state.valid ? '' : this.state.errorMessage.split('\n').map((item, key) => {
-      return <span key={key}>{item}<br /></span>
+    console.log(typeof this.state.errorMessages)
+    let errors = this.state.valid ? '' : this.state.errorMessages.map(error => {
+      return error !== '' ? <li className="errorMessage">{error}</li> : ''
     })
     return (
       <div>
@@ -65,28 +65,28 @@ class QueryEditor extends Component {
                 <tbody>
                   <tr>
                     <td>
-                    <p id="employeeTitle"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Invalid') : ''} </p>
-              <span className="placeholderText"> {this.state.validated ? error : ''} </span>
-              <br />
-              <button id="saveBtn" className="confirmationButton" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
-              <button className="neutralButton" disabled={this.state.notModified} onClick={this.cancel}> Undo </button>
-              
-                      </td>
-
-                      <td>
                       {inputs}
+                    </td>
 
-                        </td>
-                    </tr>
+                    <td>
+                      <p id="employeeTitle"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Errors Received:') : (errors===''?'': 'Errors Received:')} </p>
+                      <list>{errors}</list>
+                      <br />
+                      <button id="saveBtn" className="confirmationButton" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
+                      <button className="neutralButton" disabled={this.state.notModified} onClick={this.cancel}> Undo </button>
+                      <br />
+                      <span className="placeholderText"> {this.state.validated ? (this.state.valid ? 'Assembled Query:' : 'No results generated due to error.') : 'Submit query for validation.'} </span>
+                      <span className="placeholderText"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
+
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-              <span className="placeholderText"> {(this.state.validated && this.state.valid) ? 'Assembled Query' : 'No results generated due to error.'} </span>
-              <span className="placeholderText"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
             </div>
             :
             <p id="noEmployee"> No Query Exists </p>
         }
-        <p id="noEmployee"> Version 1.2 </p>
+        <p id="noEmployee"> Version 1.3 </p>
 
       </div>
     )

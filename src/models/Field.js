@@ -51,56 +51,56 @@ export default class Field {
 
     validate(value) {
         let regex = ''
-        let errorMessage = ''
+        let errorMessages = []
         let valid = true
 
         if (value.length < this.min || value.length > this.max) {
             valid = false
             if (this.min === this.max)
-                errorMessage += 'The "' + this.name + '" field should be ' + this.min + ' character' + (this.min === 1 ? '' : 's') + ' long.\n'
+                errorMessages.push('The "' + this.name + '" field should be ' + this.min + ' character' + (this.min === 1 ? '' : 's') + ' long.')
             else
-                errorMessage += 'The "' + this.name + '" field should be between ' + this.min + ' and ' + this.max + ' characters long.\n'
+                errorMessages.push('The "' + this.name + '" field should be between ' + this.min + ' and ' + this.max + ' characters long.')
         }
 
         if (valid) {
-            errorMessage = 'The "' + this.name + '" field '
+            let errorStart = 'The "' + this.name + '" field '
             switch (this.custom) {
                 case 'date':
                     regex = dataTypes.date.regex
-                    errorMessage += dataTypes.date.error
+                    errorMessages.push(errorStart + dataTypes.date.error)
                     break;
                 case 'year':
                     regex = dataTypes.year.regex
-                    errorMessage += dataTypes.year.error
+                    errorMessages.push(errorStart + dataTypes.year.error)
                     break;
                 case 'sex':
                     regex = dataTypes.sex.regex
-                    errorMessage += dataTypes.sex.error
+                    errorMessages.push(errorStart + dataTypes.sex.error)
                     break;
                 case 'state':
                     regex = dataTypes.state.regex
-                    errorMessage += dataTypes.state.error
+                    errorMessages.push(errorStart + dataTypes.state.error)
                     break;
                 default:
                     if (this.alpha && !this.numeric && !this.special) {
                         regex = dataTypes.alpha.regex
-                        errorMessage += dataTypes.alpha.error
+                        errorMessages.push(errorStart + dataTypes.alpha.error)
                     }
                     else if (!this.alpha && this.numeric && !this.special) {
                         regex = dataTypes.numeric.regex
-                        errorMessage += dataTypes.numeric.error
+                        errorMessages.push(errorStart + dataTypes.numeric.error)
                     }
                     else if (this.alpha && !this.numeric && this.special) {
                         regex = dataTypes.alphaspecial.regex
-                        errorMessage += dataTypes.alphaspecial.error
+                        errorMessages.push(errorStart + dataTypes.alphaspecial.error)
                     }
                     else if (this.alpha && this.numeric && !this.special) {
                         regex = dataTypes.alphanumeric.regex
-                        errorMessage += dataTypes.alphanumeric.error
+                        errorMessages.push(errorStart + dataTypes.alphanumeric.error)
                     }
                     else if (!this.alpha && this.numeric && this.special) {
                         regex = dataTypes.numericspecial.regex
-                        errorMessage += dataTypes.numericspecial.error
+                        errorMessages.push(errorStart + dataTypes.numericspecial.error)
                     }
                     break;
             }
@@ -123,10 +123,11 @@ export default class Field {
                     valid = parseInt(value, 10) <= date.getFullYear() ? true : false //returns true if the year is less than or equal to this year
                 }
             }
-            if(valid)
-                errorMessage = ''
+            console.log(this.code + ' ' + errorMessages)
+            if (valid)
+                errorMessages = []
         }
 
-        return { valid: valid, errorMessage: errorMessage }
+        return { valid: valid, errorMessages: errorMessages }
     }
 }
