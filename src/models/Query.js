@@ -61,6 +61,7 @@ export default class Query {
   }
 
   validateFields(fields) {
+    this.valid = true
     let errorMessage = ''
     fields.map(field => {
       if (this.mandatoryFields.includes(field.code) && this[field.code] === '') {
