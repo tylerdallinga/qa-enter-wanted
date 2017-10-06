@@ -1,22 +1,22 @@
 export default class Query {
-  constructor(){
-      this.hdr = ''
-      this.mke = ''
-      this.ori = ''
-      this.nam = ''
-      this.sex = ''
-      this.rac = ''
-      this.hgt = ''
-      this.wgt = ''
-      this.hai = ''
-      this.off = ''
-      this.dow = ''
-      this.oln = ''
-      this.ols = ''
-      this.oly = ''
-      this.lic = ''
-      this.lis = ''
-      this.liy = ''
+  constructor() {
+    this.hdr = ''
+    this.mke = ''
+    this.ori = ''
+    this.nam = ''
+    this.sex = ''
+    this.rac = ''
+    this.hgt = ''
+    this.wgt = ''
+    this.hai = ''
+    this.off = ''
+    this.dow = ''
+    this.oln = ''
+    this.ols = ''
+    this.oly = ''
+    this.lic = ''
+    this.lis = ''
+    this.liy = ''
 
     this.mandatoryFields = [
       'hdr',
@@ -31,14 +31,23 @@ export default class Query {
       'off',
       'dow'
     ]
-    this.optionalFields = [
-      'oln',
-      'oly',
-      'ols',
-      'lis',
-      'liy',
-      'lic',
-      'lis'
+    this.optionalFieldGroups = [
+      {
+        error: 'If Operator\'s License Number, DL State, or DL Expiration Year are present, all three must be present.\n',
+        list: [
+          'oln',
+          'oly',
+          'ols'
+        ]
+      },
+      {
+        error: 'If License Plate, License State, or License Year are present, all three must be present.\n',
+        list: [
+          'lis',
+          'liy',
+          'lic'
+        ]
+      }
     ]
     this.valid = true
     this.assembledQuery = ''
@@ -47,40 +56,37 @@ export default class Query {
     this.updateField = this.updateField.bind(this)
   }
 
-  updateField(code, val){
+  updateField(code, val) {
     this[code] = val;
   }
 
-  validateFields(fields){
+  validateFields(fields) {
     let errorMessage = ''
-    if(this.oln!==''||this.ols!==''||this.oly!==''){
-      if(this.oln===''||this.ols===''||this.oly===''){
-        this.valid = false
-        this.errorMessage += 'If Operator\'s License Number, State or Year are present, all three must be present.\n'
-      }
-    }
-    if(this.lic!==''||this.lis!==''||this.liy!==''){
-      if(this.lic===''||this.lis===''){
-        this.valid = false
-        this.errorMessage += 'If Operator\'s License Number, State or Year are present, all three must be present.\n'
-      }
-    }
-    fields.map(field =>{
-      if(this.mandatoryFields.includes(field.code)&&this[field.code]===''){
+    fields.map(field => {
+      if (this.mandatoryFields.includes(field.code) && this[field.code] === '') {
         this.valid = false
         errorMessage += 'The field named "' + field.name + '" must be included.\n'
       }
-      if(this[field.code]==='')
+      if (this[field.code] === '')
         return false
       let results = field.validate(this[field.code])
-      if(!results.valid)
+      if (!results.valid)
         this.valid = false
       errorMessage += results.errorMessage
       return true
     })
-    if(this.valid)
+    errorMessage += this.optionalFieldGroups.map(group => {
+      console.log(errorMessage)
+      let fieldsEntered = 0
+      for (let i = 0; i < group.list.length; i++){
+        if(this[group.list[i]] !== '' )
+          fieldsEntered ++ //adds 1 for every field in the group that has been populated
+      }
+      return (fieldsEntered < group.list.length && fieldsEntered > 0) ? group.error : '' //if there is at least one, but not an entry for each field, will return error message
+    })
+    if (this.valid)
       this.assembledQuery = this.hdr + '.' + this.mke + '.' + this.ori + '/' + this.nam + '.' + this.sex + '.' + this.rac + '.' + this.hgt + ',' + this.wgt + '.' + this.off + '.' + this.hair + '.' + this.dow + '.' + this.oln + '.' + this.ols + this.oly + '.' + this.lic + '.' + this.lis + '.' + this.liy
 
-    return({ valid: this.valid, errorMessage: errorMessage, assembledQuery: this.assembledQuery })
+    return ({ valid: this.valid, errorMessage: errorMessage, assembledQuery: this.assembledQuery })
   }
 }
