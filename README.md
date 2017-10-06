@@ -26,7 +26,7 @@ special: these are any characters other than numbers and letters, including blan
 * Weight: Required, 3 characters in length, numeric only in lbs, use leading zero if necessary
 * Hair: Required, 3-10 characters in length, alpha only
 * Offense: Required, 5-15 characters in length, any allowed
-* Date of Warrant/Violation: Required, 8 characters in length, numeric in MMDDYYYY format
+* Date of Warrant/Violation: Required, 8 characters in length, numeric in MMDDYYYY format (allows dates from 1900 to today +1 day, to account for time zone differences)
 * Drivers License: Optional, 1-20 characters in length, any characters allowed, if included requires DL State & DL Expiration Year
 * DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers Licens & DL Expiration Year
 * DL Expiration Year: Optional, 4 characters in length, numberic in YYYY format, if included requires Drivers License & DL State
