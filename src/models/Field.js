@@ -59,7 +59,7 @@ export default class Field {
         }
 
         if (valid) {
-            errorMessage = 'The "' + this.name + '" field'
+            errorMessage = 'The "' + this.name + '" field '
             switch (this.custom) {
                 case 'date':
                     regex = dataTypes.date.regex
