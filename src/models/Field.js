@@ -47,66 +47,9 @@ export default class Field {
 
     validate(value) {
         let regex = ''
-        let errorMessage = 'The "' + this.name + '" field '
-        switch (this.custom) {
-            case 'date':
-                regex = dataTypes.date.regex
-                errorMessage += dataTypes.date.error
-                break;
-            case 'year':
-                regex = dataTypes.year.regex
-                errorMessage += dataTypes.year.error
-                break;
-            case 'sex':
-                regex = dataTypes.sex.regex
-                errorMessage += dataTypes.sex.error
-                break;
-            default:
-                if (this.alpha && !this.numeric && !this.special) {
-                    regex = dataTypes.alpha.regex
-                    errorMessage += dataTypes.alpha.error
-                }
-                else if (!this.alpha && this.numeric && !this.special) {
-                    regex = dataTypes.numeric.regex
-                    errorMessage += dataTypes.numeric.error
-                }
-                else if (this.alpha && !this.numeric && this.special) {
-                    regex = dataTypes.alphaspecial.regex
-                    errorMessage += dataTypes.alphaspecial.error
-                }
-                else if (this.alpha && this.numeric && !this.special) {
-                    regex = dataTypes.alphanumeric.regex
-                    errorMessage += dataTypes.alphanumeric.error
-                }
-                else if (!this.alpha && this.numeric && this.special) {
-                    regex = dataTypes.numericspecial.regex
-                    errorMessage += dataTypes.numericspecial.error
-                }
-                break;
-        }
-
+        let errorMessage = ''
         let valid = true
 
-        if (regex !== '') {
-            valid = regex.test(value)
-            if (this.custom === 'date' && valid) {
-                let date = new Date()
-                let today = ''
-                today += date.getFullYear() //formatting date YYYYMMDD allows for direct >< comparison for earlier/later dates
-                let month = date.getMonth() + 1
-                today += month < 10 ? '0' + month : month //adds leading 0 for months before october (10)
-                let day = date.getDate() + 1 //to account for differences in time zones, will allow one day past current date
-                today += day < 10 ? '0' + day : day //adds leading 0 for days before the 10th of the month
-                let dateToCompare = value.slice(4, 8) + value.slice(0, 2) + value.slice(2, 4) //changes entered date to YYYYMMDD for direct comparison
-                valid = parseInt(dateToCompare, 10) < parseInt(today, 10) ? true : false //returns true if date entered is less than today
-            }
-            else if (this.custom === 'year' && valid) {
-                let date = new Date()
-                valid = parseInt(value, 10) <= date.getFullYear() ? true : false //returns true if the year is less than or equal to this year
-            }
-        }
-        if (valid)
-            errorMessage = ''
         if (value.length < this.min || value.length > this.max) {
             valid = false
             if (this.min === this.max)
@@ -114,6 +57,68 @@ export default class Field {
             else
                 errorMessage += 'The "' + this.name + '" field should be between ' + this.min + ' and ' + this.max + ' characters long.\n'
         }
+
+        if (valid) {
+            errorMessage = 'The "' + this.name + '" field'
+            switch (this.custom) {
+                case 'date':
+                    regex = dataTypes.date.regex
+                    errorMessage += dataTypes.date.error
+                    break;
+                case 'year':
+                    regex = dataTypes.year.regex
+                    errorMessage += dataTypes.year.error
+                    break;
+                case 'sex':
+                    regex = dataTypes.sex.regex
+                    errorMessage += dataTypes.sex.error
+                    break;
+                default:
+                    if (this.alpha && !this.numeric && !this.special) {
+                        regex = dataTypes.alpha.regex
+                        errorMessage += dataTypes.alpha.error
+                    }
+                    else if (!this.alpha && this.numeric && !this.special) {
+                        regex = dataTypes.numeric.regex
+                        errorMessage += dataTypes.numeric.error
+                    }
+                    else if (this.alpha && !this.numeric && this.special) {
+                        regex = dataTypes.alphaspecial.regex
+                        errorMessage += dataTypes.alphaspecial.error
+                    }
+                    else if (this.alpha && this.numeric && !this.special) {
+                        regex = dataTypes.alphanumeric.regex
+                        errorMessage += dataTypes.alphanumeric.error
+                    }
+                    else if (!this.alpha && this.numeric && this.special) {
+                        regex = dataTypes.numericspecial.regex
+                        errorMessage += dataTypes.numericspecial.error
+                    }
+                    break;
+            }
+
+            if (regex !== '') {
+                valid = regex.test(value)
+                if (this.custom === 'date' && valid) {
+                    let date = new Date()
+                    let today = ''
+                    today += date.getFullYear() //formatting date YYYYMMDD allows for direct >< comparison for earlier/later dates
+                    let month = date.getMonth() + 1
+                    today += month < 10 ? '0' + month : month //adds leading 0 for months before october (10)
+                    let day = date.getDate() + 1 //to account for differences in time zones, will allow one day past current date
+                    today += day < 10 ? '0' + day : day //adds leading 0 for days before the 10th of the month
+                    let dateToCompare = value.slice(4, 8) + value.slice(0, 2) + value.slice(2, 4) //changes entered date to YYYYMMDD for direct comparison
+                    valid = parseInt(dateToCompare, 10) < parseInt(today, 10) ? true : false //returns true if date entered is less than today
+                }
+                else if (this.custom === 'year' && valid) {
+                    let date = new Date()
+                    valid = parseInt(value, 10) <= date.getFullYear() ? true : false //returns true if the year is less than or equal to this year
+                }
+            }
+            if(valid)
+                errorMessage = ''
+        }
+
         return { valid: valid, errorMessage: errorMessage }
     }
 }
