@@ -84,7 +84,7 @@ class QueryEditor extends Component {
             :
             <p id="noEmployee"> No Query Exists </p>
         }
-        <p id="noEmployee"> Version 1.3 </p>
+        <p id="noEmployee"> Version 1.4 </p>
 
       </div>
     )
