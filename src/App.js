@@ -12,6 +12,7 @@ class App extends Component {
     this.state = {
       query: new Query(),
       fields: [
+        //defines the list of fields in the query
         new Field('Header', 'hdr', true, true, true, null, 9, 19),
         new Field('MKE', 'mke', true, false, true, null, 2, 4),
         new Field('Originating Agency Identifier', 'ori', true, true, false, null, 9, 9),

@@ -1,23 +1,28 @@
 export default class Query {
   constructor() {
-    this.hdr = ''
-    this.mke = ''
-    this.ori = ''
-    this.nam = ''
-    this.sex = ''
-    this.rac = ''
-    this.hgt = ''
-    this.wgt = ''
-    this.hai = ''
-    this.off = ''
-    this.dow = ''
-    this.oln = ''
-    this.ols = ''
-    this.oly = ''
-    this.lic = ''
-    this.lis = ''
-    this.liy = ''
+    //defines the list of fields in the form
+    this.fields = {
+      hdr : '',
+      mke : '',
+      ori : '',
+      nam : '',
+      sex : '',
+      rac : '',
+      hgt : '',
+      wgt : '',
+      hai : '',
+      off : '',
+      dow : '',
+      oln : '',
+      ols : '',
+      oly : '',
+      lic : '',
+      lis : '',
+      liy : '',
 
+    }
+    
+    //all the mandatory fields per the requirements
     this.mandatoryFields = [
       'hdr',
       'mke',
@@ -31,6 +36,8 @@ export default class Query {
       'off',
       'dow'
     ]
+
+    //optional fields per the requirements, where if one is submitted, all must be filled
     this.optionalFieldGroups = [
       {
         error: 'If Operator\'s License Number, DL State, or DL Expiration Year are present, all three must be present.\n',
@@ -49,28 +56,29 @@ export default class Query {
         ]
       }
     ]
-    this.valid = true
-    this.assembledQuery = ''
+    
+    this.valid = true             //query is valid until proven defective
+    this.assembledQuery = ''      //assembled query is built when the fields are validated
 
     this.validateFields = this.validateFields.bind(this)
     this.updateField = this.updateField.bind(this)
   }
 
   updateField(code, val) {
-    this[code] = val;
+    this.fields[code] = val;
   }
 
   validateFields(fields) {
     this.valid = true
     let errorMessages = []
     fields.map(field => {
-      if (this.mandatoryFields.includes(field.code) && this[field.code] === '') {
+      if (this.mandatoryFields.includes(field.code) && this.fields[field.code] === '') {
         this.valid = false
         errorMessages.push('The field named "' + field.name + '" must be included.\n')
       }
       if (this[field.code] === '')
         return false
-      let results = field.validate(this[field.code])
+      let results = field.validate(this.fields[field.code])
       if (!results.valid){
         this.valid = false
         let tempMessages = errorMessages
@@ -89,7 +97,9 @@ export default class Query {
       return true
     })
     if (this.valid)
-      this.assembledQuery = this.hdr + '.' + this.mke + '.' + this.ori + '/' + this.nam + '.' + this.sex + '.' + this.rac + '.' + this.hgt + ',' + this.wgt + '.' + this.off + '.' + this.hair + '.' + this.dow + '.' + this.oln + '.' + this.ols + this.oly + '.' + this.lic + '.' + this.lis + '.' + this.liy
+      this.assembledQuery = this.fields.map((field, index) => {
+        return field + (index+1 === this.fields.length)? '' : '.'
+      })
 
     return ({ valid: this.valid, errorMessages: errorMessages, assembledQuery: this.assembledQuery })
   }

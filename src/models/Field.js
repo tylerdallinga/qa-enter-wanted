@@ -39,14 +39,14 @@ const dataTypes = {
 
 export default class Field {
     constructor(name, code, alpha, numeric, special, custom, min, max) {
-        this.name = name
-        this.code = code
-        this.alpha = alpha
-        this.numeric = numeric
-        this.special = special
-        this.custom = custom
-        this.min = min
-        this.max = max
+        this.name = name //name of the field
+        this.code = code //code of the field (per NCIC)
+        this.alpha = alpha //whether the field allows alphabet characters
+        this.numeric = numeric //whether the field allows numbers
+        this.special = special //whether the field allows special characters
+        this.custom = custom //the "custom" field type from the DataTypes list above, or null if no custom value
+        this.min = min //the minimum number of characters allowable
+        this.max = max //the maximum number of characters allowable
     }
 
     validate(value) {
@@ -60,9 +60,11 @@ export default class Field {
                 errorMessages.push('The "' + this.name + '" field should be ' + this.min + ' character' + (this.min === 1 ? '' : 's') + ' long.')
             else
                 errorMessages.push('The "' + this.name + '" field should be between ' + this.min + ' and ' + this.max + ' characters long.')
+
+            // throw 'Invalid length: ' + this.name //will console.log an error on field length
         }
 
-        if (valid) {
+        if (valid) { //only checks field content if the right number of characters is entered.
             let errorStart = 'The "' + this.name + '" field '
             switch (this.custom) {
                 case 'date':
@@ -103,10 +105,15 @@ export default class Field {
                         errorMessages.push(errorStart + dataTypes.numericspecial.error)
                     }
                     break;
+                    // if (!valid)
+                        // throw 'Invalid value in ' + this.name //throws error if invalid value entered
             }
 
+            //this section will only trigger if a regex has been defined for the field, which should be any field that has any content validation at all (not allowing any types of characters whatsoever), and regex will only be set if it passed field length requirements already, so this will only trigger while the field has passed everything so far...
             if (regex !== '') {
-                valid = regex.test(value)
+                valid = regex.test(value) //valid will be set to true if the content matches the set regex
+
+                //further date checking to make sure the date is no later than tomorrow
                 if (this.custom === 'date' && valid) {
                     let date = new Date()
                     let today = ''
@@ -118,11 +125,13 @@ export default class Field {
                     let dateToCompare = value.slice(4, 8) + value.slice(0, 2) + value.slice(2, 4) //changes entered date to YYYYMMDD for direct comparison
                     valid = parseInt(dateToCompare, 10) < parseInt(today, 10) ? true : false //returns true if date entered is less than today
                 }
+                //further checking to make sure the year is no later than this year
                 else if (this.custom === 'year' && valid) {
                     let date = new Date()
                     valid = parseInt(value, 10) <= date.getFullYear() ? true : false //returns true if the year is less than or equal to this year
                 }
             }
+            //if the field checks out as valid, makes sure to pass an empty list of error messages
             if (valid)
                 errorMessages = []
         }
