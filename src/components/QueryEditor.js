@@ -47,7 +47,7 @@ class QueryEditor extends Component {
     let inputs = this.props.fields.map(field => {
       return <div>
         <span className="placeholderText"> {field.name} </span><br />
-        <input className="materialInput" value={this.state.query[field.code]} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
+        <input className="materialInput" value={this.state.query[field.code]||''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
       </div>
     })
     let errors = this.state.valid ? '' : this.state.errorMessages.map(error => {
@@ -84,7 +84,7 @@ class QueryEditor extends Component {
             :
             <p id="noEmployee"> No Query Exists </p>
         }
-        <p id="noEmployee"> Version 1.4 </p>
+        <p id="noEmployee"> Version 1.5 </p>
 
       </div>
     )

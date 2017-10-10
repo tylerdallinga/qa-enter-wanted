@@ -54,17 +54,15 @@ export default class Field {
         let errorMessages = []
         let valid = true
 
-        if (value.length < this.min || value.length > this.max) {
+        if ((value.length < this.min || value.length > this.max) && value !== '') {
             valid = false
             if (this.min === this.max)
                 errorMessages.push('The "' + this.name + '" field should be ' + this.min + ' character' + (this.min === 1 ? '' : 's') + ' long.')
             else
                 errorMessages.push('The "' + this.name + '" field should be between ' + this.min + ' and ' + this.max + ' characters long.')
-
-            // throw 'Invalid length: ' + this.name //will console.log an error on field length
         }
 
-        if (valid) { //only checks field content if the right number of characters is entered.
+        if (valid && value !== '') { //only checks field content if the right number of characters is entered.
             let errorStart = 'The "' + this.name + '" field '
             switch (this.custom) {
                 case 'date':
@@ -105,8 +103,8 @@ export default class Field {
                         errorMessages.push(errorStart + dataTypes.numericspecial.error)
                     }
                     break;
-                    // if (!valid)
-                        // throw 'Invalid value in ' + this.name //throws error if invalid value entered
+                // if (!valid)
+                // throw 'Invalid value in ' + this.name //throws error if invalid value entered
             }
 
             //this section will only trigger if a regex has been defined for the field, which should be any field that has any content validation at all (not allowing any types of characters whatsoever), and regex will only be set if it passed field length requirements already, so this will only trigger while the field has passed everything so far...

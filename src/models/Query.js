@@ -2,26 +2,26 @@ export default class Query {
   constructor() {
     //defines the list of fields in the form
     this.fields = {
-      hdr : '',
-      mke : '',
-      ori : '',
-      nam : '',
-      sex : '',
-      rac : '',
-      hgt : '',
-      wgt : '',
-      hai : '',
-      off : '',
-      dow : '',
-      oln : '',
-      ols : '',
-      oly : '',
-      lic : '',
-      lis : '',
-      liy : '',
+      hdr: '',
+      mke: '',
+      ori: '',
+      nam: '',
+      sex: '',
+      rac: '',
+      hgt: '',
+      wgt: '',
+      hai: '',
+      off: '',
+      dow: '',
+      oln: '',
+      ols: '',
+      oly: '',
+      lic: '',
+      lis: '',
+      liy: '',
 
     }
-    
+
     //all the mandatory fields per the requirements
     this.mandatoryFields = [
       'hdr',
@@ -56,7 +56,7 @@ export default class Query {
         ]
       }
     ]
-    
+
     this.valid = true             //query is valid until proven defective
     this.assembledQuery = ''      //assembled query is built when the fields are validated
 
@@ -70,6 +70,7 @@ export default class Query {
 
   validateFields(fields) {
     this.valid = true
+    this.assembledQuery = ''
     let errorMessages = []
     fields.map(field => {
       if (this.mandatoryFields.includes(field.code) && this.fields[field.code] === '') {
@@ -79,7 +80,7 @@ export default class Query {
       if (this[field.code] === '')
         return false
       let results = field.validate(this.fields[field.code])
-      if (!results.valid){
+      if (!results.valid) {
         this.valid = false
         let tempMessages = errorMessages
         errorMessages = tempMessages.concat(results.errorMessages)
@@ -89,17 +90,19 @@ export default class Query {
     this.optionalFieldGroups.map(group => {
       let fieldsEntered = 0
       for (let i = 0; i < group.list.length; i++) {
-        if (this[group.list[i]] !== '')
+        if (this.fields[group.list[i]] !== '')
           fieldsEntered++ //adds 1 for every field in the group that has been populated
       }
       if (fieldsEntered < group.list.length && fieldsEntered > 0)
         errorMessages.push(group.error) //if there is at least one, but not an entry for each field, will return error message
       return true
     })
-    if (this.valid)
-      this.assembledQuery = this.fields.map((field, index) => {
-        return field + (index+1 === this.fields.length)? '' : '.'
+    if (this.valid) {
+      Object.entries(this.fields).forEach(([key, value]) => {
+        this.assembledQuery += value + '.'
       })
+      this.assembledQuery = this.assembledQuery.slice(0, -1)
+    }
 
     return ({ valid: this.valid, errorMessages: errorMessages, assembledQuery: this.assembledQuery })
   }
