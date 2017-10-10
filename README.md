@@ -39,33 +39,7 @@ Upon successful entry, a text blob will be created, which consists of each of th
 ## Project Instructions
 This morning's stretch activity is a de-bugging treasure hunt!
 
-#### Target #1
-A bug has been introduced to the project that is described in the console.  Can you find it?  Gather the information you would need to report the bug (steps to reproduce, data used, etc).
-
-#### Target #2
-Fix the bug!
-
-#### Target #3
-Amazon's "Meowing Duck" has been replicated in the source.  Can you figure out where?
-
-#### Target #4
-A hidden message has been placed in various attributes of the elements in the code...  Use the inspector in Google's Dev Tools to look at each of the following to figure it out.
-Part 1: The submit button's value
-Part 2: The title "Enter Wanted"'s class
-Part 3: The "Valid" message's alt value
-Part 4: The version's parent tag type
-Part 5: A comment at the bottom of the page's source
-
-#### Target #5
-The value of the "this.state" property "assembledQuery" in QueryEditor.js after clearing the form.
-
-#### Target #6
-A proposal for a validation fix for the height field, limiting it to feet/inches, with the first character for feet and the following two for inches...
-1: What should the limits for both feet and inches be?
-2: What file(s) would you need to make changes in?
-3: Can you hypothesize what changes those should be?
-    * In plain English
-    * In code
+Your instructions are located in the JIRA task, EW-77
 
 ## Contributions
 
