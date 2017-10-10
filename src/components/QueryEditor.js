@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as source from './values.js';
 
 class QueryEditor extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class QueryEditor extends Component {
       if(queryCopy.fields.hasOwnProperty(prop))
         queryCopy.fields[prop] = ''
     }
-    this.setState({ notModified: true, validated: false, valid: true, errorMessages: [], assembledQuery: '', query: queryCopy})
+    this.setState({ notModified: true, validated: false, valid: true, errorMessages: [], assembledQuery: source.default, query: queryCopy})
   }
 
   render() {
@@ -69,10 +70,10 @@ class QueryEditor extends Component {
                     </td>
 
                     <td>
-                      <p id="validHeader"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Errors Received:') : (errors===''?'': 'Errors Received:')} </p>
+                      <p id="validHeader" alt="is"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Errors Received:') : (errors===''?'': 'Errors Received:')} </p>
                       <list id="errorList">{errors}</list>
                       <br />
-                      <button id="saveBtn" className="button" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
+                      <button id="saveBtn" className="button" value="The" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
                       <button id="clearBtn" className="button" onClick={this.clear}> Clear </button>
                       <br />
                       <span className="placeholderText"> {this.state.validated ? (this.state.valid ? 'Assembled Query:' : 'No results generated due to error.') : 'Submit query for validation.'} </span>
@@ -86,7 +87,7 @@ class QueryEditor extends Component {
             :
             <p id="noQuery"> Error Loading Query </p>
         }
-        <p id="versionNumber"> Version 1.5 </p>
+        <a id="versionNumber"> Version 1.5 </a>
 
       </div>
     )
@@ -94,3 +95,4 @@ class QueryEditor extends Component {
 }
 
 export default QueryEditor;
+

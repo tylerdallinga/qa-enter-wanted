@@ -37,11 +37,35 @@ special: these are any characters other than numbers and letters, including blan
 Upon successful entry, a text blob will be created, which consists of each of the values entered, separated by a '.' - any optional fields left blank will still be denoted in the blob by an additional '.'
 
 ## Project Instructions
-At your instructor's direction, you will design/implement test cases to cover this functionality.
+This morning's stretch activity is a de-bugging treasure hunt!
 
-At another time, also at your instructor's direction, execute the previously created tests, tracking all bugs discovered.
+#### Target #1
+A bug has been introduced to the project that is described in the console.  Can you find it?  Gather the information you would need to report the bug (steps to reproduce, data used, etc).
 
-Get your [testing templates here](https://docs.google.com/spreadsheets/d/1G6fFXoie0U2RRnxUGK-cfW6qOUEmZd-cF8W33yRyuVs/edit?usp=sharing).
+#### Target #2
+Fix the bug!
+
+#### Target #3
+Amazon's "Meowing Duck" has been replicated in the source.  Can you figure out where?
+
+#### Target #4
+A hidden message has been placed in various attributes of the elements in the code...  Use the inspector in Google's Dev Tools to look at each of the following to figure it out.
+Part 1: The submit button's value
+Part 2: The title "Enter Wanted"'s class
+Part 3: The "Valid" message's alt value
+Part 4: The version's parent tag type
+Part 5: A comment at the bottom of the page's source
+
+#### Target #5
+The value of the "this.state" property "assembledQuery" in QueryEditor.js after clearing the form.
+
+#### Target #6
+A proposal for a validation fix for the height field, limiting it to feet/inches, with the first character for feet and the following two for inches...
+1: What should the limits for both feet and inches be?
+2: What file(s) would you need to make changes in?
+3: Can you hypothesize what changes those should be?
+    * In plain English
+    * In code
 
 ## Contributions
 

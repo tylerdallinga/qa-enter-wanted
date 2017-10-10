@@ -4,7 +4,7 @@ class Header extends Component {
   render() {
     return (
       <div className="titleBar">
-        <span className="titleText"> Enter Wanted </span>
+        <span className="cake"> Enter Wanted </span>
       </div>
     )
   }
