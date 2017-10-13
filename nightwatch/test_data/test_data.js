@@ -3,7 +3,7 @@ module.exports = {
         minimumEntry: {
             //the 'key' for the fields should match the key of the selectors in css_selectors
             fields: {
-                hdr: '123456789',
+                hdr: '',
                 mke: 'MKE',
                 oai: 'CHI1234SI',
                 nam: 'Harry Dresden',
