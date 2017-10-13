@@ -9,7 +9,7 @@ module.exports = {
     after: browser => {
         browser.end()
     },
-    'I can put data in the fields and generate a result' : (browser) => {
+    'I can put data in the fields and generate a result' : browser => {
             //set the transaction from your data file
         let transaction = data.transactions.minimumEntry
             //send the fields & data to input
