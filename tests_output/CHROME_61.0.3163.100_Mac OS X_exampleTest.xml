@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites errors="0"
+            failures="1"
+            tests="1">
+
+  <testsuite name="exampleTest"
+    errors="0" failures="1" hostname="" id="" package="exampleTest" skipped="0"
+    tests="1" time="3.542" timestamp="Fri, 13 Oct 2017 03:30:55 GMT">
+  
+    <testcase name="I can put data in the fields and generate a result" classname="exampleTest" time="3.542" assertions="13">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+      <failure message="Expected element &lt;span[name=queryBody]&gt; text to equal: &quot;123456789.MKE.CHI1234SI.Harry Dresden.M.W.607.200.Brown.Arson.05022016......&quot; - element was not found">    at Object.I can put data in the fields and generate a result (/Users/ajlarson/src/qa-enter-wanted/nightwatch/tests/exampleTest.js:19:21)
+    at _combinedTickCallback (internal/process/next_tick.js:73:7)</failure>
+
+    
+    </testcase>
+  
+
+  
+
+  
+  </testsuite>
+</testsuites>
