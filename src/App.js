@@ -12,23 +12,24 @@ class App extends Component {
     this.state = {
       query: new Query(),
       fields: [
-        new Field('Header', 'hdr', true, true, true, 9, 19),
-        new Field('MKE', 'mke', true, false, true, 3, 3), //should allow 2-4
-        new Field('Originating Agency Identifier', 'ori', true, true, false, 9, 9),
-        new Field('Name', 'nam', true, false, true, 3, 30), //should allow numeric
-        new Field('Sex', 'sex', true, false, false, 1, 1),
-        new Field('Race', 'rac', true, false, false, 1, 5), //should only allow 1 character
-        new Field('Height', 'hgt', false, true, false, 3, 3),
-        new Field('Weight', 'wgt', false, true, false, 3, 3),
-        new Field('Hair', 'hai', true, true, false, 1, 10), //should only allow 4-10 alpha
-        new Field('Offense', 'off', true, true, true, 5, 15),
-        new Field('Date of Warrant/Violation', 'dow', true, false, true, 8, 8), //should only allow numeric (in date format)
-        new Field('Drivers License', 'oln', true, true, true, 1, 20),
-        new Field('DL State', 'ols', true, false, true, 2, 2), //should only allow alpha
-        new Field('DL Expiration Year', 'oly', false, true, false, 3, 3), //should only allow 4 numeric for year
-        new Field('License Plate', 'lic', true, true, false, 5, 8),
-        new Field('License State', 'lis', false, true, false, 4, 4), //should only allow 2 alpha
-        new Field('License Year', 'liy', true, false, false, 2, 2) //should allow 4 numeric
+        //defines the list of fields in the query
+        new Field('Header', 'hdr', true, true, true, null, 9, 19),
+        new Field('MKE', 'mke', true, false, true, null, 2, 4),
+        new Field('Originating Agency Identifier', 'ori', true, true, false, null, 9, 9),
+        new Field('Name', 'nam', true, true, true, null, 3, 30),
+        new Field('Sex', 'sex', true, false, false, 'sex', 1, 1),
+        new Field('Race', 'rac', true, false, false, null, 1, 1),
+        new Field('Height', 'hgt', false, true, false, null, 3, 3),
+        new Field('Weight', 'wgt', false, true, false, null, 3, 3),
+        new Field('Hair', 'hai', true, false, false, null, 3, 10), 
+        new Field('Offense', 'off', true, true, true, null, 5, 15),
+        new Field('Date of Warrant/Violation', 'dow', false, true, false, 'date', 8, 8),
+        new Field('Drivers License', 'oln', true, true, true, null, 1, 20),
+        new Field('DL State', 'ols', true, false, false, 'state', 2, 2),
+        new Field('DL Expiration Date', 'oly', false, true, false, 'date', 8, 8),
+        new Field('License Plate', 'lic', true, true, false, null, 5, 8),
+        new Field('License State', 'lis', true, false, false, 'state', 2, 2),
+        new Field('License Year', 'liy', false, true, false, 'year', 4, 4)
       ]
     }
 

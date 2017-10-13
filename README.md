@@ -10,29 +10,36 @@ Development on the application has been focused only on completing the form and 
 
 ### The requirements are as follows for each field, and the results:
 
+alpha: any alphabetical characters, upper or lower case
+
+numeric: numbers only, 0-9
+
+special: these are any characters other than numbers and letters, including blank spaces ' '
+
 * Header: Required, 9-19 characters in length, any allowed
-* MKE: Required, 2-4 alpha/special characters in lenth
+* MKE: Required, 2-4 alpha/special characters in length
 * Originating Agency Identifier: Required, 9 alphanumeric characters in length
-* Name: Rewired, 3-30 characters in length, any allowed
-* Sex: Required, 1 character in length, alphabet only
-* Race: Requires, 1 character in length, alphabet only
-* Height: Required, 3 characters in length, numeric only
-* Weight: Required, 3 characters in length, numeric only
-* Hair: Required, 4-10 characters in length, alpha only
+* Name: Required, 3-30 characters in length, any allowed
+* Sex: Required, 1 character in length, alphabet only, F (female) M (male) and U (unknown) are the only accepted entries
+* Race: Required, 1 character in length, alphabet only
+* Height: Required, 3 characters in length, numeric only in FII format, where F is feet and I is inches
+* Weight: Required, 3 characters in length, numeric only in lbs, use leading zero if necessary
+* Hair: Required, 3-10 characters in length, alpha only
 * Offense: Required, 5-15 characters in length, any allowed
-* Date of Warrant/Violation, 8 characters in length, numeric in MMDDYYYY format
+* Date of Warrant/Violation: Required, 8 characters in length, numeric in MMDDYYYY format (allows dates from 1900 to today +1 day, to account for time zone differences)
 * Drivers License: Optional, 1-20 characters in length, any characters allowed, if included requires DL State & DL Expiration Year
-* DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers Licens & DL Year
-* DL Year: Optional, 4 characters in length, numberic in YYYY format, if included requires Drivers License & DL State
+* DL State: Optional, 2 characters in length, State Abbreviations only, if included requires Drivers License & DL Expiration Year
+* DL Expiration Year: Optional, 4 characters in length, numeric in YYYY format, if included requires Drivers License & DL State
+* License Plate: Optional, 5-8 alphanumeric characters in length, if included requires License State & License Year
+* License State: Optional, 2 characters in length, State Abbreviations only, if included requires License Plate and License Year
+* License Year: Optional, 4 characters in length, numeric in YYYY format, if included requires License Plate and License Year
 
 Upon successful entry, a text blob will be created, which consists of each of the values entered, separated by a '.' - any optional fields left blank will still be denoted in the blob by an additional '.'
 
 ## Project Instructions
-At your instructor's direction, you will design/implement test cases to cover this functionality.
+This morning's stretch activity is a de-bugging treasure hunt!
 
-At another time, also at your instructor's direction, execute the previously created tests, tracking all bugs discovered.
-
-Get your [testing templates here](https://docs.google.com/spreadsheets/d/1G6fFXoie0U2RRnxUGK-cfW6qOUEmZd-cF8W33yRyuVs/edit?usp=sharing).
+Your instructions are located in the JIRA task, EW-77
 
 ## Contributions
 

@@ -1,57 +1,60 @@
 import React, { Component } from 'react';
+import * as source from './values.js';
 
 class QueryEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      query: props.query,
-      originalQuery: null,
+      query: Object.assign({},props.query),
       notModified: true,
       validated: false,
       valid: true,
-      errorMessage: '',
+      errorMessages: [],
       assembledQuery: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.submit = this.submit.bind(this)
-    this.cancel = this.cancel.bind(this)
+    this.clear = this.clear.bind(this)
   }
 
   componentWillReceiveProps(props) {
-    this.setState({ query: Object.assign({}, props.selected), originalQuery: props.selected, notModified: true })
+    this.setState({ notModified: true })
   }
 
   handleChange(prop, val) {
     if (this.state.notModified) {
-      this.setState({ notModified: false, validated: false, errorMessage: '' })
+      this.setState({ notModified: false, validated: false })
     }
-
-    var queryCopy = Object.assign({}, this.state.query)
-    queryCopy[prop] = val
+    let queryCopy = Object.assign({}, this.state.query)
+    queryCopy.fields[prop] = val
     queryCopy.updateField(prop, val)
     this.setState({ query: queryCopy })
   }
 
   submit() {
     let results = this.state.query.validateFields(this.props.fields)
-    this.setState({ originalQuery: Object.assign({}, this.state.query), notModified: true, validated: true, valid: results.valid, errorMessage: results.errorMessage, assembledQuery: results.assembledQuery })
+    this.setState({ notModified: true, validated: true, valid: results.valid, errorMessages: results.errorMessages, assembledQuery: results.assembledQuery })
   }
 
-  cancel() {
-    this.setState({ query: Object.assign({}, this.state.originalQuery), notModified: true, validated: true })
-    this.setState({ employee: Object.assign({}, this.state.originalQuery), notModified: true })
+  clear() {
+    let queryCopy = Object.assign({}, this.state.query)
+    for(let prop in queryCopy.fields){
+      if(queryCopy.fields.hasOwnProperty(prop))
+        queryCopy.fields[prop] = ''
+    }
+    this.setState({ notModified: true, validated: false, valid: true, errorMessages: [], assembledQuery: source.default, query: queryCopy})
   }
 
   render() {
     let inputs = this.props.fields.map(field => {
       return <div>
-        <span className="placeholderText"> {field.name} </span>
-        <input className="materialInput" value={this.state.query[field.code]} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
+        <span className="fieldHeader" name={field.code + 'Header'}> {field.name} </span><br />
+        <input className="inputField" name={field.code + 'Input'} value={this.state.query.fields[field.code]||''} onChange={(e) => { this.handleChange(field.code, e.target.value) }}></input>
       </div>
     })
-    let error = this.state.errorMessage.split('\n').map((item, key) => {
-      return <span key={key}>{item}<br /></span>
+    let errors = this.state.valid ? '' : this.state.errorMessages.map(error => {
+      return error !== '' ? <li className="errorMessage">{error}</li> : ''
     })
     return (
       <div>
@@ -63,27 +66,28 @@ class QueryEditor extends Component {
                 <tbody>
                   <tr>
                     <td>
-                    <p id="employeeTitle"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Invalid') : ''} </p>
-              <span className="placeholderText"> {this.state.validated ? error : ''} </span>
-              <br />
-              <button id="saveBtn" className="confirmationButton" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
-              <button className="neutralButton" disabled={this.state.notModified} onClick={this.cancel}> Undo </button>
-              
-                      </td>
-
-                      <td>
                       {inputs}
+                    </td>
 
-                        </td>
-                    </tr>
+                    <td>
+                      <p id="validHeader" alt="is"> {this.state.validated ? (this.state.valid ? 'Valid' : 'Errors Received:') : (errors===''?'': 'Errors Received:')} </p>
+                      <list id="errorList">{errors}</list>
+                      <br />
+                      <button id="saveBtn" className="button" value="The" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
+                      <button id="clearBtn" className="button" onClick={this.clear}> Clear </button>
+                      <br />
+                      <span name="queryTitle"> {this.state.validated ? (this.state.valid ? 'Assembled Query:' : 'No results generated due to error.') : 'Submit query for validation.'} </span>
+                      <span name="queryBody"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
+
+                    </td>
+                  </tr>
                 </tbody>
               </table>
-              <span className="placeholderText"> {this.state.validated && this.state.valid ? 'Assembled Query' : 'No results generated due to error.'} </span>
-              <span className="placeholderText"> {this.state.validated && this.state.valid ? this.state.query.assembledQuery : ''} </span>
             </div>
             :
-            <p id="noEmployee"> No Query Exists </p>
+            <p id="noQuery"> Error Loading Query </p>
         }
+        <a id="versionNumber"> Version 1.6 </a>
 
       </div>
     )
@@ -91,3 +95,4 @@ class QueryEditor extends Component {
 }
 
 export default QueryEditor;
+
