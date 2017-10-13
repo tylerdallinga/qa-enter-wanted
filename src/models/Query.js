@@ -93,8 +93,10 @@ export default class Query {
         if (this.fields[group.list[i]] !== '')
           fieldsEntered++ //adds 1 for every field in the group that has been populated
       }
-      if (fieldsEntered < group.list.length && fieldsEntered > 0)
+      if (fieldsEntered < group.list.length && fieldsEntered > 0){
         errorMessages.push(group.error) //if there is at least one, but not an entry for each field, will return error message
+        this.valid = false
+      }
       return true
     })
     if (this.valid) {
@@ -103,7 +105,6 @@ export default class Query {
       })
       this.assembledQuery = this.assembledQuery.slice(0, -1)
     }
-
     return ({ valid: this.valid, errorMessages: errorMessages, assembledQuery: this.assembledQuery })
   }
 }

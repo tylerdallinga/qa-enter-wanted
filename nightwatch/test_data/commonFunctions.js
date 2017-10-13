@@ -15,6 +15,15 @@ const inputSet = (selector_set, value_set, browser) => {
     }
 }
 
+const messagesCheck = (messageField, message_set, browser) => {
+    for (var message_key in message_set) {
+        if (message_set.hasOwnProperty(message_key)) {
+            var message = message_set[message_key];
+            browser.expect.element(messageField).text.to.contain(message)
+        }
+    }
+}
+
 module.exports = {
     //a function to input values into an input text field
     //and check that the value input is accurate before
@@ -23,5 +32,9 @@ module.exports = {
     //will take a set of selectors and values and input all
     //of them, assuming that the key for the selector is the
     //same key as the value
-    inputSet: inputSet
+    inputSet: inputSet,
+    //will take the field the message(s) should be present in
+    //then an object containing all the messages that should
+    //be in that field, and then checks for them
+    messagesCheck: messagesCheck
 }
