@@ -8,7 +8,7 @@
 
 # production
 /build
-/test_output
+/tests_output
 selenium-debug.log
 nightwatchProps.js
 

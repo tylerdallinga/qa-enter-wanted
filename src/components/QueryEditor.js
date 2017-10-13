@@ -76,8 +76,8 @@ class QueryEditor extends Component {
                       <button id="saveBtn" className="button" value="The" disabled={this.state.notModified} onClick={this.submit}> Submit </button>
                       <button id="clearBtn" className="button" onClick={this.clear}> Clear </button>
                       <br />
-                      <span className="placeholderText"> {this.state.validated ? (this.state.valid ? 'Assembled Query:' : 'No results generated due to error.') : 'Submit query for validation.'} </span>
-                      <span className="placeholderText"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
+                      <span name="queryTitle"> {this.state.validated ? (this.state.valid ? 'Assembled Query:' : 'No results generated due to error.') : 'Submit query for validation.'} </span>
+                      <span name="queryBody"> {(this.state.validated && this.state.valid) ? this.state.assembledQuery : ''} </span>
 
                     </td>
                   </tr>
